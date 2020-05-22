@@ -1,11 +1,17 @@
-/* h1 {
-    background-color: red;
-    color: white;
-} */
+
+body {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
 
 table {
     border-collapse: collapse;
-}
+    }
 
 table td {
     border: 5px solid purple;
@@ -32,32 +38,40 @@ table tr td:last-child {
 }
 
 .board td {
-    width: 30px;
-    height: 30px;
+    vertical-align: "middle"; 
+    /* align : "center"; */
+    width: 60px;
+    height: 60px;
+    max-width: 60px;
+    max-height: 60px;
     text-align: center;
     transition: .5s;
 }
 
 .flagged {
     background-color: black;
-    color: black
+    color: black;
+    /* width: 30px;
+    height: 30px; */
+    /* max-width: 100%;
+    max-height: 100%; */
+    /* display: block; */
+    /* margin-left: auto;
+    margin-right: auto; */
 }
 
-.button {
-    border: none;
-    color: blue;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+button {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: auto;
+    margin-left: 30px;
+
 }
 
 .msg {
-font-size: 100px;
-background-color: red;
-
+    font-size: 100px;
+    background-color: red;
 }
+
 /* .timer {
     display: block;
     font-size: 40px;
@@ -75,4 +89,3 @@ background-color: red;
 .shown {
     display: 'none';
 }
-
