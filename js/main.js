@@ -1,10 +1,10 @@
 'use strict'
 const FLAG = '🚩';
 const EMPTY = '';
-const NORMAL = '😃';
+const PLAY = '😃';
 const WIN = '😎';
 const LOSE = '😭';
-const ONCLICK = '😮';
+const ONBOMB = '😮';
 
 var gBoard = []
 
@@ -22,12 +22,14 @@ var gGame = {
 }
 
 
-function init(size, mines) {    //todolist: timer
+function init(size, mines) {        //todolist: timer
     console.log('started');
+    
     gGame.isOn = true;
     gGame.livescount = 3;
     gLevel.size = size;
     gLevel.mines = mines;
+
     var mineLocation = generateMines();
     var res = buildBoard(gLevel, mineLocation);
     setMinesNegsCount(mineLocation);
@@ -117,7 +119,7 @@ function renderBoard() {
             var id = (i.toString() + ',' + j.toString())
 
             if (gBoard[i][j].isMine)
-                strHTML += `<td class="bomb hidden" onclick="cellClicked(this)" id=${id} oncontextmenu="cellFlagged(this)"> * </td>`
+                strHTML += `<td class="bomb hidden" onclick="cellClicked(this)" id=${id} oncontextmenu="cellFlagged(this)">  * </td>`
             else {
                 strHTML += `<td class="hidden" onclick="cellClicked(this)" id=${id} oncontextmenu="cellFlagged(this)"> ${gBoard[i][j].minesAroundCount} </td>`
             }
@@ -129,9 +131,8 @@ function renderBoard() {
 
     var elTbody = document.querySelector('.board');
     elTbody.innerHTML = strHTML;
-    // elTbody.innerHTML = '<tr><td>WOW</td></tr>';
-    var elMsg = document.querySelector('.msg')
-    elMsg.innerText = ''
+    // var elMsg = document.querySelector('.msg')
+    // elMsg.innerText = ''
 }
 
 
@@ -189,14 +190,16 @@ function cellClicked(elTd) {          //(mouse left click)
         gGame.livescount--
         var elLives = document.querySelector('.lives')
         elLives.innerText = `only ${gGame.livescount} more lives`
+        var elMsg = document.querySelector('.msg')
+        elMsg.innerText = '😮'
 
         if (gGame.livescount === 0) {
 
             var elMsg = document.querySelector('.msg')
-            elMsg.innerText = 'game over'
+            elMsg.innerText = '😭'
             elLives.innerText = ``
 
-            var elBomb = document.querySelector('.bomb') //show other bombs not yet revealed-
+            var elBomb = document.querySelector('.bomb') //show other bombs not yet revealed
             console.log(elBomb)
             elBomb.classList.remove('hidden')
             gGame.isOn = false
@@ -205,6 +208,8 @@ function cellClicked(elTd) {          //(mouse left click)
 
     else {                                      // IF pressed on regular number
         elTd.classList.remove('hidden')
+        var elMsg = document.querySelector('.msg')
+        elMsg.innerText = '😃'
     }
     checkWin()
 
@@ -254,8 +259,9 @@ function checkWin() {                          //check if all mine cells are fla
 
     }
     var elMsg = document.querySelector('.msg')
-    elMsg.innerText = 'You win!'
+    elMsg.innerText = '😎'
     return true
+
 }
 
 
